@@ -1,3 +1,35 @@
-<h1>
-  {{title}}
-</h1>
+<!--Naviagation: simple title-->
+<nav>
+  <div class="nav-wrapper grey darken-4">
+    <a href="#" class="brand-logo">Geometry</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+    </ul>
+  </div>
+</nav>
+
+<div class="row">
+
+  <!--Action card-->
+  <div class="col s3">
+  </div>
+
+  <!--WebGL-->
+  <div class="col s6">
+  </div>
+
+  <!--Objects outline-->
+  <div class="col s3">
+    <app-objects-outline (editionToggled)="toggleEdition($event)"></app-objects-outline>
+  </div>
+
+</div>
+
+<app-object-manipulator></app-object-manipulator>
+
+
+<!-- "New object" button-->
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large grey darken-4">
+    <i (click)="objectManipulator.openObjectForm('New')" class="large material-icons teal">add</i>
+  </a>
+</div>

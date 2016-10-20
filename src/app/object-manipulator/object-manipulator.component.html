@@ -1,0 +1,38 @@
+<!--Modal-->
+<div id="objectForm" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>{{mode}}</h4>
+
+    <form class="row">
+      <div class="col s3">
+        <p *ngFor="let type of aviableObjectTypes; let i = index;">
+          <input (ngModelChange)="updateVerticesArray()" [(ngModel)]="selectedType" value="{{type}}" name="selectedType" type="radio"
+            id="object_type_{{i}}" />
+          <label [attr.for]="'object_type_' + i">{{type}}</label>
+        </p>
+      </div>
+
+      <div class="col s9">
+        <div class="row" *ngFor="let vertex of vertices; let i = index;">
+          <div class="input-field col s3">
+            <input [(ngModel)]="vertices[i].x" id="x_{{i}}" name="x_{{i}}" type="number" class="validate">
+            <label [attr.for]="'x_' + i">x</label>
+          </div>
+          <div class="input-field col s3">
+            <input [(ngModel)]="vertices[i].y" id="y_{{i}}" name="y_{{i}}" type="number" class="validate">
+            <label [attr.for]="'y_' + i">y</label>
+          </div>
+          <div class="input-field col s3">
+            <input [(ngModel)]="vertices[i].z" id="z_{{i}}" name="z_{{i}}" type="number" class="validate">
+            <label [attr.for]="'z_' + i">z</label>
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="modal-footer">
+      <a (click)="doneManipulations()" class=" modal-action modal-close waves-effect waves-green btn-flat">Create</a>
+    </div>
+
+  </div>
