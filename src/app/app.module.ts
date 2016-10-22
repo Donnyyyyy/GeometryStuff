@@ -5,20 +5,29 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ObjectsOutlineComponent } from './objects-outline/objects-outline.component';
-import { ObjectService } from './services/';
+import { ObjectService, OperationService } from './services/';
 import { ObjectManipulatorComponent } from './object-manipulator/object-manipulator.component';
+import { OperationsComponent } from './operations/operations.component';
+import { CodeComponent } from './code/code.component';
+import { AppRoutingModule } from './app-routing.module';
+import { WrapperComponent } from './wrapper/wrapper.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ObjectsOutlineComponent,
-    ObjectManipulatorComponent
+    ObjectManipulatorComponent,
+    OperationsComponent,
+    CodeComponent, 
+    WrapperComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule, 
+    AppRoutingModule
   ],
-  providers: [ObjectService],
-  bootstrap: [AppComponent]
+  providers: [ObjectService, OperationService],
+  bootstrap: [WrapperComponent]
 })
 export class AppModule { }

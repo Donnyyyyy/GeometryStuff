@@ -1,0 +1,13 @@
+<div class="row">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea name="code" [(ngModel)]="code" id="codearea" class="materialize-textarea"></textarea>
+        <label for="codearea">Code</label>
+      </div>
+    </div>
+  </form>
+</div>
+
+<a (click)="processCode()" class="waves-effect waves-teal btn-flat">Execute</a>
+<a (click)="next()" class="waves-effect waves-teal btn-flat">Next</a>

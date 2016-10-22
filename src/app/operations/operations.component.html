@@ -1,0 +1,14 @@
+<!--<div class="container">
+  <h4 class="grey-text text-darken-3">Операции</h4>
+</div>-->
+
+<ul class="collapsible" data-collapsible="accordion">
+  
+  <li *ngFor="let operation of operations">
+    <div class="collapsible-header"><i class="material-icons">back</i>{{operation.shortDescription}}</div>
+    <div class="collapsible-body">
+      <p>{{operation.fullDescription}}</p>
+    </div>
+  </li>
+
+</ul>

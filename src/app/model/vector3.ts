@@ -1,6 +1,6 @@
-import { VectorSequence } from './';
+import { GeometricObject } from './';
 
-export class Vector3 implements VectorSequence {
+export class Vector3 implements GeometricObject {
 
     public static i: Vector3 = new Vector3(1, 0, 0);
     public static j: Vector3 = new Vector3(0, 1, 0);
@@ -66,6 +66,10 @@ export class Vector3 implements VectorSequence {
 
     public asVector3Arr() {
         return [this.copy()];
+    }
+
+    public getType(){
+        return 'Vector3';
     }
 
     public equals(another: Vector3) {

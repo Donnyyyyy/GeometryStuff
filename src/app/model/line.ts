@@ -1,6 +1,6 @@
-import { Vector3, VectorSequence, LineEquation, GeometryUtils, Plane } from './';
+import { Vector3, GeometricObject, LineEquation, GeometryUtils, Plane } from './';
 
-export class Line implements VectorSequence {
+export class Line implements GeometricObject {
 
     public a: Vector3;
     public b: Vector3;
@@ -54,6 +54,10 @@ export class Line implements VectorSequence {
 
     public asVector3Arr() {
         return [this.a.copy(), this.b.copy()];
+    }
+
+    public getType(){
+        return 'Line';
     }
 
     public equals(another: Line): boolean {

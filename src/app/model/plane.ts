@@ -1,6 +1,6 @@
-import { Vector3, PlaneEquation} from './';
+import { Vector3, PlaneEquation, GeometricObject} from './';
 
-export class Plane {
+export class Plane implements GeometricObject{
 
     public points: Vector3[];
     public equation: PlaneEquation;
@@ -13,5 +13,13 @@ export class Plane {
 
     public getNormal(): Vector3 {
         return new Vector3(this.equation.a, this.equation.b, this.equation.c);
+    }
+
+    public asVector3Arr(){
+        return this.points;
+    }
+
+    public getType(){
+        return 'Plane';
     }
 }

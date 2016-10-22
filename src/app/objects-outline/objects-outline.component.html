@@ -1,8 +1,12 @@
+<!--<div class="container">
+  <h4 class="grey-text text-darken-3">Объекты</h4>
+</div>-->
+
 <ul class="collection">
   <li class="collection-item avatar" *ngFor="let object of objects; let i = index;">
-    
+
     <p class="circle">
-      <input class="object-selector" type="checkbox" id="is_checked_{{i}}" />
+      <input class="object-selector" type="checkbox" id="is_checked_{{i}}"/>
       <label class="object-selector" [attr.for]="'is_checked_' + i"></label>
     </p>
 
