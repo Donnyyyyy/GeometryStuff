@@ -1,24 +1,42 @@
 import { Injectable } from '@angular/core';
 
-import { GeometricOperation } from './';
+import { GeometricOperation, Operations, ObjectService, ParameterManager } from './';
 import { GeometricObject, Vector3, GeometryUtils } from '../model';
 
 @Injectable()
 export class OperationService {
 
-  private static operations = [];
+  private static operations: GeometricOperation[];
+  private parameters: GeometricObject[];
+  private parameterManager: ParameterManager;
 
-  private static selected: GeometricObject[] = [];
-
-  constructor() { }
+  constructor() {
+    if (!OperationService.operations) {
+      OperationService.operations = Operations.get();
+    }
+    this.parameters = [];
+    this.parameterManager = new ParameterManager();
+  }
 
   public getOperations(): GeometricOperation[] {
-    OperationService.operations.push(new GeometricOperation('cyka', 'blad'));
     return OperationService.operations;
   }
 
-  public select(object: GeometricObject) {
-    OperationService.selected.push(object);
+  public setActiveOperation(operation: GeometricOperation) {
+    this.parameterManager.requiredSignature = operation.parameters;
   }
 
+  public areParametersValid(): boolean {
+    return this.parameterManager.isValid();
+  }
+
+  public addParameter(parameter: GeometricObject) {
+    this.parameters.push(parameter);
+    this.parameterManager.add(parameter.getType());
+  }
+
+  public removeParameter(parameter: GeometricObject) {
+    this.parameters.splice(this.parameters.indexOf(parameter));
+    this.parameterManager.remove(parameter.getType());
+  }
 }

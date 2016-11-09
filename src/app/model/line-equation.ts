@@ -37,6 +37,10 @@ export class LineEquation {
         this.zEquation = zEquation;
     }
 
+    public pointFromParam(param: number): Vector3 {
+        return new Vector3(this.xEquation.value(param), this.yEquation.value(param), this.zEquation.value(param));
+    }
+
     public equals(another: LineEquation): boolean {
         return this.xEquation.equals(another.xEquation)
             && this.yEquation.equals(another.yEquation)

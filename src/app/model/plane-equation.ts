@@ -54,4 +54,8 @@ export class PlaneEquation {
             && this.c === another.c
             && this.d === another.d;
     }
+
+    public toString(){
+        return `a: ${this.a}, b: ${this.b}, c: ${this.c}, d: ${-this.d}`;
+    }
 }

@@ -37,12 +37,14 @@ export class Token {
                 return 'SEMICOLON';
             case TokenType.EOF:
                 return 'EOF';
+            case TokenType.ERROR:
+                return 'ERROR';
         }
     }
 }
 
 export enum TokenType {
     NUM, ID, IF, ELSE, WHILE, DO, LBRA, RBRA, LPAR, RPAR, PLUS, MINUS, LESS,
-    EQUAL, SEMICOLON, EOF
+    EQUAL, SEMICOLON, EOF, ERROR
 }
 

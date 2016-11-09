@@ -38,13 +38,29 @@ export class Lexer {
             return new Token(this.SYMBOLS[lastChar], null);
 
         } else {
+            // return to its start
             this.pointer--;
             let word = this.nextWord();
 
             if (this.WORDS[word]) {
                 return new Token(this.WORDS[word], null);
             } else {
-                return new Token(TokenType.ID, word);
+                if (word.length === 1) {
+                    return new Token(TokenType.ID, word);
+                }
+                else {
+                    if (word.length === 0) {
+                        this.pointer++;
+                        return new Token(TokenType.ERROR, `Undefined symbol (${lastChar})`);
+
+                    } else if (word.length > 0) {
+                        return new Token(TokenType.ERROR, `Unresolved variable id (${word})`);
+
+                    } else {
+                        this.pointer++;
+                        return new Token(TokenType.ERROR, 'Unresolved error');
+                    }
+                }
             }
         }
     }
@@ -77,7 +93,7 @@ export class Lexer {
         return word;
     }
 
-    private isSpace(char: string){
+    private isSpace(char: string) {
         return char === ' ' || char === '   ' || char === '\n';
     }
 

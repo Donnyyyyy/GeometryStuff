@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import { OperationService } from '../services';
-import { GeometricOperation } from '../services';
+import { GeometricOperation, ObjectService, ObjectData, objectTypes } from '../services';
 
 declare var $: any;
 
@@ -13,14 +13,26 @@ declare var $: any;
 export class OperationsComponent implements OnInit, AfterViewInit {
 
   operations: GeometricOperation[];
+  selected: GeometricOperation;
+  prettyNames = objectTypes;
 
-  constructor(operationService: OperationService) {
+  constructor(private operationService: OperationService,
+    private objectService: ObjectService) {
+
     this.operations = operationService.getOperations();
+  }
+
+  private setSelected(operation: GeometricOperation) {
+    this.selected = operation;
+    this.operationService.setActiveOperation(operation);
+  }
+
+  private convert(object){
+    return ObjectService.asObjectData(object);
   }
 
   ngOnInit() {
   }
-
 
   ngAfterViewInit() {
     $(document).ready(function () {

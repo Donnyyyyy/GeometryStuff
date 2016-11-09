@@ -2,21 +2,20 @@
   <h4 class="grey-text text-darken-3">Объекты</h4>
 </div>-->
 
-<ul class="collection">
-  <li class="collection-item avatar" *ngFor="let object of objects; let i = index;">
+<ul class="collection sidebar left">
+    <li class="collection-item avatar" *ngFor="let object of objects; let i = index;">
 
-    <p class="circle">
-      <input class="object-selector" type="checkbox" id="is_checked_{{i}}"/>
-      <label class="object-selector" [attr.for]="'is_checked_' + i"></label>
-    </p>
+        <p class="circle">
+            <input (click)="updateSelection(i);" name="isSelected" [(ngModel)]="selectedMap[i]" class="object-selector" type="checkbox" id="is_checked_{{i}}" />
+            <label class="object-selector" [attr.for]="'is_checked_' + i"></label>
+        </p>
 
-    <span class="title">{{object.toString()}}</span>
-    <p>First Line <br> Second Line
-    </p>
+        <span class="title">{{objectsData[i].type}}</span>
+        <app-object [object]="objectsData[i]" [objectSignature]="declatedObjectsDesc[object.getType()]"></app-object>
 
-    <div class="row secondary-content">
-      <a href="#"><i (click)="toggleEdition(i)" class="material-icons grey-text text-darken-4">mode_edit</i></a>
-      <a href="#"><i (click)="objectService.removeObject(i)" class="material-icons grey-text text-darken-4">delete</i></a>
-    </div>
-  </li>
+        <div class="row secondary-content">
+            <!--<a href="#"><i (click)="toggleEdition(i)" class="material-icons grey-text text-darken-4">mode_edit</i></a>-->
+            <a href="#"><i (click)="objectService.removeObject(i)" class="material-icons grey-text text-darken-4">delete</i></a>
+        </div>
+    </li>
 </ul>

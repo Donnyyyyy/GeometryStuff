@@ -2,12 +2,29 @@
   <h4 class="grey-text text-darken-3">Операции</h4>
 </div>-->
 
-<ul class="collapsible" data-collapsible="accordion">
-  
+<ul class="collapsible sidebar" data-collapsible="accordion">
+
   <li *ngFor="let operation of operations">
-    <div class="collapsible-header"><i class="material-icons">back</i>{{operation.shortDescription}}</div>
+    <div (click)="setSelected(operation)" class="collapsible-header">
+      <i class="material-icons">send</i>
+      <span class="truncate">{{operation.description}} </span>
+    </div>
+
     <div class="collapsible-body">
-      <p>{{operation.fullDescription}}</p>
+      <!--In case of invalid params-->
+      <p *ngIf="!operationService.areParametersValid()" class="red-text"> Недопустимые параметры!</p>
+
+      <!--In case of text relult-->
+      <!--Dont read this code below this comment! It is extremly painfull!-->
+      <p *ngIf="operationService.areParametersValid() && convert(selected.callback(objectService.getSelected())) === null">
+        {{selected.callback(objectService.getSelected())}}
+      </p>
+
+      <!--In case of object relult-->
+      <p *ngIf="operationService.areParametersValid() && convert(selected.callback(objectService.getSelected())) !== null">
+        <b>{{prettyNames[selected.callback(objectService.getSelected()).getType()]}}</b>
+        <app-object [object]="convert(selected.callback(objectService.getSelected()))"></app-object>
+      </p>
     </div>
   </li>
 

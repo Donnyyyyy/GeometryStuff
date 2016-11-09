@@ -9,8 +9,7 @@ export class Line implements GeometricObject {
 
     public static fromPlanes(plane1: Plane, plane2: Plane): Line {
         let equation: LineEquation = LineEquation.fromPlaneEqs(plane1.equation, plane2.equation);
-        let fakeLine: Line = new Line(undefined, undefined);
-        fakeLine.equation = equation;
+        let fakeLine: Line = new Line(equation.pointFromParam(0), equation.pointFromParam(1));
 
         return fakeLine;
     }

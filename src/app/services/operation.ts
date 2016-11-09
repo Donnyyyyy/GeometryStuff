@@ -2,18 +2,17 @@ import { GeometricObject } from '../model/';
 
 export class GeometricOperation {
 
-    public shortDescription: string;
-
-    public fullDescription: string;
+    public description: string;
 
     public parameters: { [type: string]: number };
 
-    public doOperation: (parameters: GeometricObject[]) => any;
+    public callback: (parameters: GeometricObject[]) => any;
 
-    public constructor(shortDescription: string, fullDescription: string) {
-        this.shortDescription = shortDescription;
-        this.fullDescription = fullDescription;
+    public constructor(description: string, parametrs: { [type: string]: number },
+        callback: (parameters: GeometricObject[]) => any) {
 
-        console.log(shortDescription, fullDescription);
+        this.description = description;
+        this.parameters = parametrs;
+        this.callback = callback;
     }
 }

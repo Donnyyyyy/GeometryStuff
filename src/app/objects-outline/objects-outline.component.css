@@ -1,3 +1,10 @@
-.object-selector{
+.object-selector {
     margin: 12px;
+}
+
+.sidebar {
+    position: fixed;
+    height: 100%;
+    width: 348px;
+    overflow: scroll;
 }

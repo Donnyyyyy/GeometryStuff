@@ -10,3 +10,4 @@ export * from './polynomial';
 export * from './line-segment';
 export * from './lexer';
 export * from './tokens';
+export * from './scalar';

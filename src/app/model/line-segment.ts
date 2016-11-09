@@ -18,4 +18,12 @@ export class LineSegment {
     public asVector3() {
         return this.end.copy().add(this.start.getReverse());
     }
+
+    public asVector3Arr() {
+        return [this.start.copy(), this.end.copy()];
+    }
+
+    public getType() {
+        return 'LineSegment';
+    }
 }

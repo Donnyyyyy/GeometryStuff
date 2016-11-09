@@ -1,0 +1,10 @@
+.collapsible-body p {
+    padding: 14;
+}
+
+.sidebar {
+    position: fixed;
+    width: 358px;
+    height: 670px;
+    overflow: scroll;
+}
