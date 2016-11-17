@@ -39,6 +39,7 @@ export class OperationsComponent implements OnInit, AfterViewInit {
       $('.collapsible').collapsible({
         accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
       });
+
     });
   }
 }

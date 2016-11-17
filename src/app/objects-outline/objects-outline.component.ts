@@ -1,13 +1,15 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
 
 import { ObjectService, OperationService, declatedObjectsDesc } from '../services';
+
+declare var $: any;
 
 @Component({
   selector: 'app-objects-outline',
   templateUrl: './objects-outline.component.html',
   styleUrls: ['./objects-outline.component.css']
 })
-export class ObjectsOutlineComponent implements OnInit {
+export class ObjectsOutlineComponent implements OnInit, AfterViewInit {
 
   objects: any[];
   objectsData: any[];
@@ -42,6 +44,11 @@ export class ObjectsOutlineComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    $(document).ready(() => {
+    });
   }
 
 }

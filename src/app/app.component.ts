@@ -3,6 +3,8 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ObjectManipulatorComponent } from './object-manipulator/object-manipulator.component';
 import { ObjectService } from './services';
 
+declare var $: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,10 +14,13 @@ export class AppComponent implements AfterViewInit {
 
   @ViewChild(ObjectManipulatorComponent) objectManipulator: ObjectManipulatorComponent;
 
-  public toggleEdition(index){
+  public toggleEdition(index) {
     this.objectManipulator.openObjectForm('Edit', index, ObjectService.asObjectDataIndex(index));
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
+    $(document).ready(() => {
+      $('.sidebar').height($(document).height() - $('.nav-wrapper').height() - 24);
+    });
   }
 }

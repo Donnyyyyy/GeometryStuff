@@ -3,8 +3,6 @@
 }
 
 .sidebar {
-    position: fixed;
-    width: 358px;
-    height: 670px;
-    overflow: scroll;
+    overflow: auto;
+    height: 100px;
 }
