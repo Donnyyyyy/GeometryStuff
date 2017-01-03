@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
-import { Lexer, Parser, Token, TokenType, Node, Program, Compiler } from '../model/';
+import { Executor, Lexer, Parser, Token, TokenType, Node, Program, Compiler } from '../model/';
 
 declare var $: any;
 
@@ -16,7 +16,12 @@ export class CodeComponent implements OnInit, AfterViewInit {
   tokens: string[];
   node: Node;
   program: Program = new Program();
+  executor: Executor;
+
   exception: string = undefined;
+  valid = false;
+  terminated: boolean;
+  inExecution = false;
 
   constructor() { }
 
@@ -24,6 +29,7 @@ export class CodeComponent implements OnInit, AfterViewInit {
   }
 
   processCode() {
+    this.terminated = false;
     this.exception = undefined;
 
     try {
@@ -34,12 +40,30 @@ export class CodeComponent implements OnInit, AfterViewInit {
       this.node = parser.parse();
 
       let compiler = new Compiler(this.node);
-
       this.program = compiler.compile();
+      this.executor = new Executor(this.program);
+
+      this.valid = true;
     } catch (e) {
+      this.valid = false;
       this.exception = e;
     }
-    console.log(this.program);
+  }
+
+  charOf(code: number) {
+    return String.fromCharCode(code);
+  }
+
+  start() {
+    while (this.inExecution && !this.terminated) {
+      this.makeStep();
+    }
+    this.inExecution = false;
+  }
+
+  makeStep() {
+    this.executor.makeStep();
+    this.terminated = this.executor.isTerminated();
   }
 
   fillTokens() {

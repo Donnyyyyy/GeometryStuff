@@ -1,16 +1,24 @@
-import { Operation, OperationType } from './';
+import { Operation, OperationType, Program } from './';
 
 export class Executor {
-    stack: number[];
-    memory: number[];
+    stack: number[] = [];
+    public memory: number[];
     terminated = false;
 
     // Compiled VM code
     code: Operation[];
     pointer: number = 0;
 
-    public constructor(code: Operation[]) {
-        this.code = code;
+    public constructor(code: Program) {
+        this.code = code.operations;
+        this.initMemory();
+    }
+
+    initMemory() {
+        this.memory = [];
+        for (let i = 'a'.charCodeAt(0); i <= 'z'.charCodeAt(0); i++){
+            this.memory[i - 'a'.charCodeAt(0)] = 0;
+        }
     }
 
     // Execute program step-by-step
@@ -46,11 +54,11 @@ export class Executor {
         }
     }
 
-    protected end(){
+    protected end() {
         this.terminated = true;
     }
 
-    protected less(){
+    protected less() {
         this.push(this.pop() > this.pop() ? 1 : 0);
     }
 
