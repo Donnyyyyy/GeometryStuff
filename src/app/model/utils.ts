@@ -73,7 +73,7 @@ export class GeometryUtils {
 
     public static getAngleVectors(a: Vector3, b: Vector3): number {
         let angleCos: number = GeometryUtils.scalarProduct(a, b) /
-            (a.length() * b.length());
+            a.length() / b.length();
 
         return Math.acos(angleCos) * 180 / Math.PI;
     }
@@ -93,7 +93,7 @@ export class GeometryUtils {
     }
 
     public static distancePointPoint(a: Vector3, b: Vector3): number {
-        return b.copy().add(a.getReverse()).length();
+        return Math.abs(b.copy().add(a.getReverse()).length());
     }
 
     public static projectPointLine(point: Vector3, line: Line): Vector3 {
@@ -208,6 +208,10 @@ export class GeometryUtils {
         return Math.abs(GeometryUtils.mixedProduct(a, b, c) / 6);
     }
 
+    public static parallelepipedVolume(p1: Vector3, p2: Vector3, p3: Vector3) {
+        return GeometryUtils.mixedProduct(p1, p2, p3);
+    }
+
     public static getSquareTriangle(p1: Vector3, p2: Vector3, p3: Vector3) {
         let a = GeometryUtils.distancePointPoint(p1, p2);
         let b = GeometryUtils.distancePointPoint(p1, p3);
@@ -216,5 +220,39 @@ export class GeometryUtils {
         let semiperimeter = (a + b + c) / 2;
 
         return Math.sqrt(semiperimeter * (semiperimeter - a) * (semiperimeter - b) * (semiperimeter - c));
+    }
+
+    public static distanceLineLine(l1: Line, l2: Line): number {
+        let vectorBetween: Vector3 = l1.a.copy().add(l2.a.getReverse());
+        let parallelepipedVol = GeometryUtils.parallelepipedVolume(l1.getDirection(), l2.getDirection(), vectorBetween);
+
+        let parallelepipedBaseSquare = GeometryUtils.vectorProduct(l1.getDirection(), l2.getDirection()).length();
+
+        return Math.abs(parallelepipedVol / parallelepipedBaseSquare);
+    }
+
+    public static intersectLineLine(l1: Line, l2: Line): Vector3 {
+        let v1 = l1.a;
+        let d1 = l1.getDirection();
+        let v2 = l2.a;
+        let d2 = l2.getDirection();
+
+        let intersection = new Vector3(
+            (v1.x * d1.y * d2.x - v2.x * d2.y * d1.x - v1.y * d1.x * d2.x + v2.y * d1.x * d2.x) / (d1.y * d2.x - d2.y * d1.x),
+            (v1.y * d1.x * d2.y - v2.y * d2.x * d1.y - v1.x * d1.y * d2.y + v2.x * d1.y * d2.y) / (d1.x * d2.y - d2.x * d1.y),
+            (v1.z * d1.y * d2.z - v2.z * d2.y * d1.z - v1.y * d1.z * d2.z + v2.y * d1.z * d2.z) / (d1.y * d2.z - d2.y * d1.z)
+        );
+
+        if (isNaN(intersection.x) || isFinite(intersection.x)) {
+            intersection.x = 0;
+        }
+        if (isNaN(intersection.y) || isFinite(intersection.y)) {
+            intersection.y = 0;
+        }
+        if (isNaN(intersection.z) || isFinite(intersection.z)) {
+            intersection.z = 0;
+        }
+
+        return intersection;
     }
 }

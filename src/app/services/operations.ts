@@ -269,6 +269,36 @@ export class Operations {
                 }),
 
             new GeometricOperation(
+                'Расстояние между прямыми',
+                {
+                    'Line': 2,
+                },
+                (parameters) => {
+                    try {
+                        let parameter1 = <Line>parameters[0];
+                        let parameter2 = <Line>parameters[1];
+                        return GeometryUtils.distanceLineLine(parameter2, parameter1);
+                    } catch (e) {
+                        return "ERROR!";
+                    }
+                }),
+
+            new GeometricOperation(
+                'Пересечение прямых',
+                {
+                    'Line': 2,
+                },
+                (parameters) => {
+                    try {
+                        let parameter1 = <Line>parameters[0];
+                        let parameter2 = <Line>parameters[1];
+                        return GeometryUtils.intersectLineLine(parameter2, parameter1);
+                    } catch (e) {
+                        return "ERROR!";
+                    }
+                }),
+
+            new GeometricOperation(
                 'Расстояние от точки до плоскости',
                 {
                     'Plane': 1,
@@ -326,7 +356,7 @@ export class Operations {
                     try {
                         let parameter1 = <Line>parameters[0];
                         let parameter2 = <Plane>parameters[1];
-                        return GeometryUtils.distanceLinePlane(parameter1, parameter2);
+                        return GeometryUtils.projectLinePlane(parameter1, parameter2);
 
                     } catch (e) {
                         try {
@@ -487,6 +517,23 @@ export class Operations {
                         let parameter1 = <Plane>parameters[0];
                         let parameter2 = <Plane>parameters[1];
                         return GeometryUtils.getAngleVectors(parameter1.getNormal(), parameter2.getNormal());
+
+                    } catch (e) {
+                        return "ERROR!";
+                    }
+                }),
+
+            new GeometricOperation(
+                'Объем параллелепипеда по 3 вершинам',
+                {
+                    'Vector3': 3,
+                },
+                (parameters) => {
+                    try {
+                        let parameter1 = <Vector3>parameters[0];
+                        let parameter2 = <Vector3>parameters[1];
+                        let parameter3 = <Vector3>parameters[2];
+                        return GeometryUtils.parallelepipedVolume(parameter1, parameter2, parameter3);
 
                     } catch (e) {
                         return "ERROR!";

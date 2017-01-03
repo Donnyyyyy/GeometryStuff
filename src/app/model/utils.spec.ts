@@ -2,6 +2,14 @@ import { TestBed } from '@angular/core/testing';
 import { Matrix, GeometryUtils, Vector3, Polynomial, LineSegment, Line, Plane, LineEquation, PlaneEquation } from './';
 
 describe('Model: Utils', () => {
+
+    it('should calculate vector length', () => {
+        let a: Vector3 = new Vector3(1, 2, 3);
+        let b: Vector3 = new Vector3(1, 3, 4);
+
+        expect(a.add(b)).toEqual(new Vector3(2, 5, 7));
+    });
+
     it('should create Matrix 3x3', () => {
         let matrix = new Matrix([
             [0, 0, 0],

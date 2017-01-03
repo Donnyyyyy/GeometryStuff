@@ -30,16 +30,22 @@ export class Lexer {
             return this.next();
 
         } else if (lastChar >= '0' && lastChar <= '9') {
-            // return to its start
-            this.pointer--;
+            this.pointer--; // return to its start
             return this.parseNumber();
 
         } else if (this.SYMBOLS[lastChar]) {
-            return new Token(this.SYMBOLS[lastChar], null);
+            // In case of '-' before the number
+            if (lastChar === '-') {
+                let nextChar = this.nextChar();
+                if (nextChar >= '0' && nextChar <= '9') {
+                    this.pointer--; // return to its start
+                    return this.parseNumber(true);
+                }
+            }
 
+            return new Token(this.SYMBOLS[lastChar], null);
         } else {
-            // return to its start
-            this.pointer--;
+            this.pointer--; // return to its start
             let word = this.nextWord();
 
             if (this.WORDS[word]) {
@@ -65,7 +71,7 @@ export class Lexer {
         }
     }
 
-    private parseNumber(): Token {
+    private parseNumber(isNegative?: boolean): Token {
         let str: string = "";
         let last: string = this.nextChar();
 
@@ -76,7 +82,7 @@ export class Lexer {
         if (last !== undefined)
             this.pointer--;
 
-        return new Token(TokenType.NUM, +str);
+        return new Token(TokenType.NUM, (+str) * ((isNegative) ? -1 : 1));
     }
 
     private nextWord() {

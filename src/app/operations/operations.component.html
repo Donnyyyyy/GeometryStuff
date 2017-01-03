@@ -10,20 +10,20 @@
       <span class="truncate">{{operation.description}} </span>
     </div>
 
-    <div class="collapsible-body">
+    <div class="collapsible-body hoverable waves-effect">
       <!--In case of invalid params-->
       <p *ngIf="!operationService.areParametersValid()" class="red-text"> Недопустимые параметры!</p>
 
       <!--In case of text relult-->
       <!--Dont read this code below this comment! It is extremly painfull!-->
-      <p *ngIf="operationService.areParametersValid() && convert(selected.callback(objectService.getSelected())) === null">
+      <p (click)="addScalarResultAsObject()" *ngIf="operationService.areParametersValid() && convert(selected.callback(objectService.getSelected())) === null">
         {{selected.callback(objectService.getSelected())}}
       </p>
 
       <!--In case of object relult-->
       <p *ngIf="operationService.areParametersValid() && convert(selected.callback(objectService.getSelected())) !== null">
         <b>{{prettyNames[selected.callback(objectService.getSelected()).getType()]}}</b>
-        <app-object [object]="convert(selected.callback(objectService.getSelected()))"></app-object>
+        <app-object (click)="addResultAsObject()" [object]="convert(selected.callback(objectService.getSelected()))"></app-object>
       </p>
     </div>
   </li>

@@ -27,8 +27,22 @@ export class OperationsComponent implements OnInit, AfterViewInit {
     this.operationService.setActiveOperation(operation);
   }
 
-  private convert(object){
+  private convert(object) {
     return ObjectService.asObjectData(object);
+  }
+
+  private addResultAsObject() {
+    let result: any = this.selected.callback(this.objectService.getSelected());
+
+    this.objectService.addObject(result);
+  }
+
+  private addScalarResultAsObject() {
+    let result: any = this.selected.callback(this.objectService.getSelected());
+
+    if (typeof (result) === 'number') {
+      this.objectService.createObject(new ObjectData(objectTypes['Scalar'], { 'Значение': result }));
+    }
   }
 
   ngOnInit() {

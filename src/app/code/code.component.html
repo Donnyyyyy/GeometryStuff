@@ -8,6 +8,31 @@
     </div>
   </form>
 </div>
+<p *ngIf="exception" class="red-text">{{exception}}</p>
 
 <a (click)="processCode()" class="waves-effect waves-teal btn-flat">Execute</a>
-<a (click)="next()" class="waves-effect waves-teal btn-flat">Next</a>
+
+<div class="row">
+  <div class="col s4">
+    <ul class="collection">
+      <li class="collection-header">
+        <h5>Lexer</h5>
+      </li>
+      <li class="collection-item" *ngFor="let token of tokens">{{ token.toString() }}</li>
+    </ul>
+  </div>
+
+  <div class="col s4">
+    <app-node *ngIf="node" [node]="node"></app-node>
+  </div>
+
+  <div class="col s4">
+    <ul class="collection">
+      <li class="collection-header">
+        <h5>VM code</h5>
+      </li>
+      <li class="collection-item" *ngFor="let operation of program.operations; let i=index">{{i}}. {{ operation.toString() }}</li>
+    </ul>
+  </div>
+
+</div>

@@ -12,6 +12,7 @@ import { CodeComponent } from './code/code.component';
 import { AppRoutingModule } from './app-routing.module';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { ObjectComponent } from './object/object.component';
+import { NodeComponent } from './node/node.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { ObjectComponent } from './object/object.component';
     ObjectManipulatorComponent,
     OperationsComponent,
     CodeComponent, 
-    WrapperComponent, ObjectComponent
+    WrapperComponent, ObjectComponent, NodeComponent
   ],
   imports: [
     BrowserModule,

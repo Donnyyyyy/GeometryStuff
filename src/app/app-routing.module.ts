@@ -7,8 +7,9 @@ import { CodeComponent }    from './code/code.component';
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: '', component: AppComponent, pathMatch: 'full' },
-      { path: 'code', component: CodeComponent }
+      // { path: '', component: AppComponent, pathMatch: 'full' },
+      // { path: 'code', component: CodeComponent }
+      { path: '', component: CodeComponent }
     ])
   ],
   exports: [

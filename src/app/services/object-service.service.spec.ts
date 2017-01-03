@@ -75,8 +75,7 @@ describe('Service: ObjectService', () => {
     });
 
     it('should return converted scalar', () => {
-        let service: ObjectService = new ObjectService();
-        let scalar = ObjectService.asObjectData(0);
+        let scalar = ObjectService.asObjectData(new Scalar(1488));
 
         expect(scalar.type)
             .toEqual('Скаляр');
@@ -88,8 +87,7 @@ describe('Service: ObjectService', () => {
     });
 
     it('should return converted vector', () => {
-        let service: ObjectService = new ObjectService();
-        let scalar = ObjectService.asObjectData(1);
+        let vector = ObjectService.asObjectData(new Vector3(1, 2, 3));
 
         let params = {
             Координаты: {
@@ -99,21 +97,23 @@ describe('Service: ObjectService', () => {
             }
         };
 
-        expect(scalar.type)
+        expect(vector.type)
             .toEqual('Вектор');
 
-        expect(scalar.params)
+        expect(vector.params)
             .toEqual(params);
     });
 
     it('should return converted line', () => {
-        let service: ObjectService = new ObjectService();
-        let scalar = ObjectService.asObjectData(2);
+        let line = ObjectService.asObjectData(new Line(
+            new Vector3(1, 2, 2),
+            new Vector3(3, 2, 2)
+        ));
 
-        expect(scalar.type)
+        expect(line.type)
             .toEqual('Прямая');
 
-        expect(scalar.params)
+        expect(line.params)
             .toEqual({
                 A: {
                     x: 1,
@@ -129,13 +129,14 @@ describe('Service: ObjectService', () => {
     });
 
     it('should return converted segment', () => {
-        let service: ObjectService = new ObjectService();
-        let scalar = ObjectService.asObjectData(3);
-
-        expect(scalar.type)
+        let segment = ObjectService.asObjectData(new LineSegment(
+            new Vector3(1, 0, -9),
+            new Vector3(1, 9, 7)
+        ));
+        expect(segment.type)
             .toEqual('Отрезок');
 
-        expect(scalar.params)
+        expect(segment.params)
             .toEqual({
                 Начало: {
                     x: 1,
@@ -151,13 +152,16 @@ describe('Service: ObjectService', () => {
     });
 
     it('should return converted plane', () => {
-        let service: ObjectService = new ObjectService();
-        let scalar = ObjectService.asObjectData(4);
+        let plane = ObjectService.asObjectData(new Plane(
+            new Vector3(1, 2, 2),
+            new Vector3(3, 2, 2),
+            new Vector3(2, -2, 8)
+        ));
 
-        expect(scalar.type)
+        expect(plane.type)
             .toEqual('Плоскость');
 
-        expect(scalar.params)
+        expect(plane.params)
             .toEqual({
                 A: {
                     x: 1,

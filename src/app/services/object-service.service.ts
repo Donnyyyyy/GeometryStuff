@@ -176,11 +176,13 @@ export class ObjectService {
       ObjectService.objects[index] = object;
   }
 
-  public removeObject(index: number) {
-    if (index >= ObjectService.objects.length)
+  public removeObject(object: GeometricObject) {
+    let index = ObjectService.objects.indexOf(object)
+    if (index < 0)
       return;
 
     ObjectService.objects.splice(index, 1);
+    ObjectService.objectsData.splice(index, 1);
   }
 
   public parseObject(objectData: ObjectData) {

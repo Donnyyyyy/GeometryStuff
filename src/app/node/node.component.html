@@ -1,0 +1,10 @@
+<ul class="collapsible popout" data-collapsible="expandable">
+  <li>
+    <div class="collapsible-header">
+      <!--<i class="material-icons">whatshot</i>-->
+      {{node.toString()}}</div>
+    <div class="collapsible-body" *ngFor="let child of node.childs;">
+      <app-node [node]="child"></app-node>
+    </div>
+  </li>
+</ul>

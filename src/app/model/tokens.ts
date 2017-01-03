@@ -1,10 +1,10 @@
 export class Token {
 
-    public constructor(public tokenType: TokenType,
+    public constructor(public type: TokenType,
         public value: any) { };
 
     public getPrettyType(): string {
-        switch (this.tokenType) {
+        switch (this.type) {
             case TokenType.NUM:
                 return 'NUM';
             case TokenType.ID:
@@ -39,6 +39,42 @@ export class Token {
                 return 'EOF';
             case TokenType.ERROR:
                 return 'ERROR';
+        }
+    }
+
+    public toString(): string {
+        if(this.type === TokenType.NUM || this.type === TokenType.ID){
+            return this.value + "";
+        } else if(this.type === TokenType.IF){
+            return 'IF';
+        } else if(this.type === TokenType.ELSE){
+            return 'ELSE';
+        } else if(this.type === TokenType.WHILE){
+            return 'WHILE';
+        } else if(this.type === TokenType.DO){
+            return 'DO';
+        } else if(this.type === TokenType.LBRA){
+            return '{';
+        } else if(this.type === TokenType.RBRA){
+            return '}';
+        } else if(this.type === TokenType.LPAR){
+            return '(';
+        } else if(this.type === TokenType.RPAR){
+            return ')';
+        } else if(this.type === TokenType.PLUS){
+            return '+';
+        } else if(this.type === TokenType.MINUS){
+            return '-';
+        } else if(this.type === TokenType.LESS){
+            return '<';
+        } else if(this.type === TokenType.EQUAL){
+            return '=';
+        } else if(this.type === TokenType.SEMICOLON){
+            return ';';
+        } else if(this.type === TokenType.EOF){
+            return 'EOF';
+        } else if(this.type === TokenType.ERROR){
+            return this.value + "";
         }
     }
 }

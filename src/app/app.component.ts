@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     $(document).ready(() => {
-      $('.sidebar').height($(document).height() - $('.nav-wrapper').height() - 24);
+      $('.sidebar').height($(document).height() - $('.nav-wrapper').height() - 26);
     });
   }
 }

@@ -1,17 +1,17 @@
 <div class="row" id="ui-container">
 
   <!--Action card-->
-  <div class="col s3">
+  <div class="col s6 l5">
     <app-operations></app-operations>
   </div>
 
   <!--WebGL-->
-  <div class="col s6">
+  <div class="col s1 l2">
     <canvas id="canvas"></canvas>
   </div>
 
   <!--Objects outline-->
-  <div class="col s3">
+  <div class="col s5 l5">
     <app-objects-outline (editionToggled)="toggleEdition($event)" class="z-depth-1"></app-objects-outline>
   </div>
 </div>

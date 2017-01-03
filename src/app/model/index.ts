@@ -11,3 +11,8 @@ export * from './line-segment';
 export * from './lexer';
 export * from './tokens';
 export * from './scalar';
+export * from './node';
+export * from './parser';
+export * from './compiler';
+export * from './code';
+export * from './executor';
